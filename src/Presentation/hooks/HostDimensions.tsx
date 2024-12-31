@@ -3,28 +3,21 @@ import { Dimensions, Keyboard } from 'react-native';
 
 export const HostDimensions = () => {
 
-  const screenHeight = Dimensions.get("window").height
-  let keybHeight = 0;
-  
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const screenHeight = Dimensions.get('window').height;
+
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", (e) => {
-      keybHeight = e.endCoordinates.height;
-      console.log(`keyboard: ${keybHeight}`);
-    });
-  
-    const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
-      keybHeight = 0;
-      console.log(`keyboard hidden`);
-    });
-  
+    const onKeyboardDidShow = (e: any) => setKeyboardHeight(e.endCoordinates.height);
+    const onKeyboardDidHide = () => setKeyboardHeight(0);
+
+    const showListener = Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
+    const hideListener = Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
+
     return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
+      showListener.remove();
+      hideListener.remove();
     };
   }, []);
 
-  return {
-    screenHeight,
-    keybHeight
-  }
+  return { screenHeight, keyboardHeight };
 }

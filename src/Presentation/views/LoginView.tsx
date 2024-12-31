@@ -8,12 +8,13 @@ export const LoginView = ({ onLogin }: { onLogin: () => void }) => {
   const [svHeight, setSvHeight]  = useState(0)
   const hasLayoutRun = useRef(false);
 
-  /* const handleLayout = (event: any) => {
+
+  const handleLayout = (event: any) => {
     if (hasLayoutRun.current) return;
     const { height } = event.nativeEvent.layout;
     setSvHeight(height)
     hasLayoutRun.current = true;
-  }; */
+  };
 
   return (
     <View>
@@ -21,19 +22,19 @@ export const LoginView = ({ onLogin }: { onLogin: () => void }) => {
         colors={['#570000ff', '#940310ff', '#cb0318ff', '#911111ff']}
         style={{
           flex: 1,
-          height: HostDimos.screenHeight,
+          height: HostDimos().screenHeight,
           pointerEvents: 'none',
           position: 'absolute',
           width: '100%'
         }} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={[styles.container, { height: HostDimos.screenHeight }]}>
-          {/* <View onLayout={handleLayout} style={[styles.foreground, {
-            top: (HostDimos.screenHeight / 2) - (svHeight / 2),
+        <View style={[styles.container, { height: HostDimos().screenHeight }]}>
+          <View onLayout={handleLayout} style={[styles.foreground, {
+            top: (HostDimos().screenHeight / 2) - (svHeight / 2),
             transform: [
               { translateX: -175 }
             ]
-          }]}> */}
+          }]}>
             <View style={styles.tbox}>
               <Text style={styles.title}>Horoscopo App</Text>
               <Image source={require('../assets/images/rb_27307.png')} style={{ width: 140, height: 140, marginTop: 20 }} />
@@ -58,7 +59,7 @@ export const LoginView = ({ onLogin }: { onLogin: () => void }) => {
                 </Pressable>
               </View>
             </View>
-          {/* </View> */}
+          </View>
         </View>
       </ScrollView>
     </View>
