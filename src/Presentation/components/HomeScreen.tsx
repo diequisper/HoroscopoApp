@@ -1,6 +1,6 @@
 import { MeshGradient } from '@kuss/react-native-mesh-gradient';
 import React from 'react'
-import { Button, Dimensions, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Home = ({ navigation }: { navigation: any }) => {

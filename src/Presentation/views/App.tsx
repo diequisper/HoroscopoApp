@@ -6,26 +6,16 @@
  */
 
 import React, { useState } from 'react';
-import {
-  Button,
-  Image,
-  SafeAreaView,
-  Text,
-  View
-} from 'react-native';
+import {Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { LoginView } from './LoginView';
-import { MeshGradient } from '@kuss/react-native-mesh-gradient';
-import { HostDimensions } from '../hooks/HostDimensions';
-import { HostDimos } from '../constants/HostDimensions';
 import { WesternHoroscope } from '../components/WesternHoroscope';
 import { ChineseHoroscope } from '../components/ChineseHoroscope';
 import { VeredicHoroscope } from '../components/VeredicHoroscope';
 import Home from '../components/HomeScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Ionicons';
-
+import { RegistrarView } from './RegistrarView';
 
 const Stack = createStackNavigator();
 
@@ -42,8 +32,7 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <NavigationContainer>
-      {isLoggedIn ? ( 
+    <NavigationContainer> 
         <Stack.Navigator
           screenOptions={{
             headerStyle: {
@@ -59,6 +48,8 @@ function App(): React.JSX.Element {
             },
             headerTintColor: '#fff',
           }}>
+          <Stack.Screen name="LoginView" component={LoginView} options={{title : "LoginView"}}/>
+          <Stack.Screen name="RegistrarView" component={RegistrarView} options={{title : "RegistrarView"}}/>
           <Stack.Screen name='Home' component={Home} 
             options={
               { 
@@ -67,8 +58,8 @@ function App(): React.JSX.Element {
                   <TouchableOpacity
                     onPress={handleLogout}
                     style={{
-                      marginRight: 15, // Espacio del borde derecho
-                      padding: 5, // Área de toque más grande
+                      marginRight: 15,
+                      padding: 5,
                     }}
                   > 
                     <Image
@@ -85,9 +76,6 @@ function App(): React.JSX.Element {
           <Stack.Screen name="ChineseHoroscope" component={ChineseHoroscope} options={{ title: 'Horóscopo Chino' }} />
           <Stack.Screen name="VedicHoroscope" component={VeredicHoroscope} options={{ title: 'Horóscopo Védico' }} />
         </Stack.Navigator>
-      ) : ( 
-        <LoginView onLogin={handleLogin} />
-      )}
     </NavigationContainer>
   );
 }
