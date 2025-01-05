@@ -4,8 +4,11 @@ import { MeshGradient } from '@kuss/react-native-mesh-gradient';
 import { HostDimensions } from '../hooks/HostDimensions';
 import { useNavigation } from '@react-navigation/native';
 
+type LoginViewProps = {
+  onLogin: () => void;
+}
 
-export const LoginView = () => {
+export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
   const [svHeight, setSvHeight]  = useState(0)
   const hasLayoutRun = useRef(false);
   const {screenHeight} = HostDimensions()
@@ -52,7 +55,8 @@ export const LoginView = () => {
                 <TextInput secureTextEntry={true} style={styles.input}></TextInput>
               </View>
               <View style={[styles.lblInputBox, { marginTop: 20 }]}>
-                <Pressable style={styles.presso}>
+                <Pressable style={styles.presso}
+                  onPress={onLogin}>
                   <Text style={styles.btnText}>Entrar</Text>
                 </Pressable>
                 <Pressable onPress={() => navigation.navigate("RegistrarView" as never)} style={[styles.presso, { marginTop: 20, width: 160, height: 40 }]}>

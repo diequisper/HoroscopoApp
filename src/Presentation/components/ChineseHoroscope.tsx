@@ -7,7 +7,7 @@ export const ChineseHoroscope = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Horóscopo Chino del día:</Text>
       <Image
-        source={require('../assets/images/horoscp.png')} // Cambia la ruta al ícono que representa el horóscopo
+        source={require('../assets/images/horoscp.jpeg')} 
         style={styles.image}
       />
       <Text style={styles.subHeader}>Gallo de Madera</Text>

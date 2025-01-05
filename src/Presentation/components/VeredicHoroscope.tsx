@@ -7,7 +7,7 @@ export const VeredicHoroscope = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Horóscopo Vedico del día:</Text>
       <Image
-        source={require('../assets/images/horoscp.png')} // Cambia la ruta al ícono que representa el horóscopo
+        source={require('../assets/images/horoscp.jpeg')} 
         style={styles.image}
       />
       <Text style={styles.subHeader}>Ashwini (Aries)</Text>

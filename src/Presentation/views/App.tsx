@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import {Image} from 'react-native';
+import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { LoginView } from './LoginView';
@@ -21,10 +21,10 @@ const Stack = createStackNavigator();
 
 function App(): React.JSX.Element {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    setIsLoggedIn(true); 
+    setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
@@ -32,27 +32,28 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <NavigationContainer> 
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#cb0318ff', 
-            },
-            headerTitleStyle: {
-              color: '#fff', 
-              fontSize: 20, 
-              fontWeight: 'bold', 
-              textShadowColor: 'rgba(0, 0, 0, 0.3)', 
-              textShadowOffset: { width: 0, height: 1 },
-              textShadowRadius: 2,
-            },
-            headerTintColor: '#fff',
-          }}>
-          <Stack.Screen name="LoginView" component={LoginView} options={{title : "LoginView"}}/>
-          <Stack.Screen name="RegistrarView" component={RegistrarView} options={{title : "RegistrarView"}}/>
-          <Stack.Screen name='Home' component={Home} 
-            options={
-              { 
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#cb0318ff',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+            fontSize: 20,
+            fontWeight: 'bold',
+            textShadowColor: 'rgba(0, 0, 0, 0.3)',
+            textShadowOffset: { width: 0, height: 1 },
+            textShadowRadius: 2,
+          },
+          headerTintColor: '#fff',
+        }}>
+        {isLoggedIn ? (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
                 title: 'Inicio',
                 headerRight: () => (
                   <TouchableOpacity
@@ -61,21 +62,28 @@ function App(): React.JSX.Element {
                       marginRight: 15,
                       padding: 5,
                     }}
-                  > 
+                  >
                     <Image
                       source={require('../assets/images/sign-out.png')}
-                      style={{ width: 24, height: 24, tintColor: "white" }}
-                      
+                      style={{ width: 24, height: 24, tintColor: 'white' }}
                     />
                   </TouchableOpacity>
-                )
-              }
-            } 
-          />
-          <Stack.Screen name="WesternHoroscope" component={WesternHoroscope} options={{ title: 'Horóscopo Occidental' }} />
-          <Stack.Screen name="ChineseHoroscope" component={ChineseHoroscope} options={{ title: 'Horóscopo Chino' }} />
-          <Stack.Screen name="VedicHoroscope" component={VeredicHoroscope} options={{ title: 'Horóscopo Védico' }} />
-        </Stack.Navigator>
+                ),
+              }}
+            />
+            <Stack.Screen name="WesternHoroscope" component={WesternHoroscope} options={{ title: 'Horóscopo Occidental' }} />
+            <Stack.Screen name="ChineseHoroscope" component={ChineseHoroscope} options={{ title: 'Horóscopo Chino' }} />
+            <Stack.Screen name="VedicHoroscope" component={VeredicHoroscope} options={{ title: 'Horóscopo Védico' }} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="LoginView">
+              {() => <LoginView onLogin={handleLogin} />}
+            </Stack.Screen>
+            <Stack.Screen name="RegistrarView" component={RegistrarView} options={{ title: 'RegistrarView' }} />
+          </>
+        )}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
