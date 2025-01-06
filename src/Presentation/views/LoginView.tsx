@@ -2,15 +2,17 @@ import React, {useRef, useState } from 'react'
 import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { MeshGradient } from '@kuss/react-native-mesh-gradient';
 import { HostDimensions } from '../hooks/HostDimensions';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParams } from './App';
 
 
 export const LoginView = () => {
+
   const [svHeight, setSvHeight]  = useState(0)
   const hasLayoutRun = useRef(false);
   const {screenHeight} = HostDimensions()
-  const navigation = useNavigation()
 
+  const navigation = useNavigation<NavigationProp<RootStackParams>>()
 
   const handleLayout = (event: any) => {
     if (hasLayoutRun.current) return;
@@ -55,7 +57,7 @@ export const LoginView = () => {
                 <Pressable style={styles.presso}>
                   <Text style={styles.btnText}>Entrar</Text>
                 </Pressable>
-                <Pressable onPress={() => navigation.navigate("RegistrarView" as never)} style={[styles.presso, { marginTop: 20, width: 160, height: 40 }]}>
+                <Pressable onPress={() => navigation.navigate("Registrar")} style={[styles.presso, { marginTop: 20, width: 160, height: 40 }]}>
                   <Text style={[styles.btnText, { fontSize: 16 }]}>Registrar</Text>
                 </Pressable>
               </View>

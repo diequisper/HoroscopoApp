@@ -17,7 +17,16 @@ import Home from '../components/HomeScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RegistrarView } from './RegistrarView';
 
-const Stack = createStackNavigator();
+export type RootStackParams = {
+  Login : undefined,
+  Registrar : undefined,
+  Home : undefined, 
+  WesternHoroscope : undefined,
+  ChineseHoroscope : undefined,
+  VedicHoroscope : undefined
+}
+
+const Stack = createStackNavigator<RootStackParams>();
 
 function App(): React.JSX.Element {
 
@@ -48,8 +57,8 @@ function App(): React.JSX.Element {
             },
             headerTintColor: '#fff',
           }}>
-          <Stack.Screen name="LoginView" component={LoginView} options={{title : "LoginView"}}/>
-          <Stack.Screen name="RegistrarView" component={RegistrarView} options={{title : "RegistrarView"}}/>
+          <Stack.Screen name="Login" component={LoginView} options={{title : "LoginView"}}/>
+          <Stack.Screen name="Registrar" component={RegistrarView} options={{title : "RegistrarView"}}/>
           <Stack.Screen name='Home' component={Home} 
             options={
               { 
