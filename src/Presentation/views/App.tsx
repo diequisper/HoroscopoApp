@@ -57,8 +57,16 @@ function App(): React.JSX.Element {
             },
             headerTintColor: '#fff',
           }}>
-          <Stack.Screen name="Login" component={LoginView} options={{title : "Login"}}/>
-          <Stack.Screen name="Registrar" component={RegistrarView} options={{title : "Registrar"}}/>
+          <Stack.Screen name="Login" component={LoginView} options={
+            {
+              title : "title",
+              headerShown : false
+            }
+          }/>
+          <Stack.Screen name="Registrar" component={RegistrarView} options={{
+            title : "Registrar",
+            headerShown : false
+          }}/>
           <Stack.Screen name='Home' component={Home} 
             options={
               { 

@@ -1,15 +1,20 @@
 import React, {useRef, useState } from 'react'
-import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from 'react-native'
 import { MeshGradient } from '@kuss/react-native-mesh-gradient';
 import { HostDimensions } from '../hooks/HostDimensions';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParams } from './App';
+import { User } from '../../Domain/User';
 
 export const LoginView = () => {
 
   const [svHeight, setSvHeight]  = useState(0)
   const hasLayoutRun = useRef(false);
   const {screenHeight} = HostDimensions()
+  const usuario = useRef("");
+  const password = useRef("");
+
+  console.log(User.getAllUser())
 
   const navigation = useNavigation<NavigationProp<RootStackParams>>()
 
@@ -19,6 +24,24 @@ export const LoginView = () => {
     setSvHeight(height)
     hasLayoutRun.current = true;
   };
+
+  function authorise(){
+    for(const u of User.getAllUser()){
+      if (usuario.current === u.username){
+        if(password.current === u.password){
+          ToastAndroid.show(`Bienvenido ${u.name}`, ToastAndroid.LONG)
+          navigation.navigate("Home")
+        }
+        else{
+          ToastAndroid.show(`${u.name} la contraseña no coincide con el registro`, ToastAndroid.LONG)
+        }
+        return
+      }
+    };
+
+      ToastAndroid.show(`No existe ese nombre de usuario`, ToastAndroid.LONG)
+      return
+  }
 
   return (
     <>
@@ -46,14 +69,14 @@ export const LoginView = () => {
             <View style={styles.formbox}>
               <View style={styles.lblInputBox}>
                 <Text style={styles.label}>Usuario</Text>
-                <TextInput style={styles.input}></TextInput>
+                <TextInput onEndEditing={(e) => {usuario.current = e.nativeEvent.text}} style={styles.input}></TextInput>
               </View>
               <View style={styles.lblInputBox}>
                 <Text style={styles.label}>Contraseña</Text>
-                <TextInput secureTextEntry={true} style={styles.input}></TextInput>
+                <TextInput onEndEditing={(e) => {password.current = e.nativeEvent.text}} secureTextEntry={true} style={styles.input}></TextInput>
               </View>
               <View style={[styles.lblInputBox, { marginTop: 20 }]}>
-                <Pressable style={styles.presso}>
+                <Pressable onPress={() => authorise()} style={styles.presso}>
                   <Text style={styles.btnText}>Entrar</Text>
                 </Pressable>
                 <Pressable onPress={() => navigation.navigate("Registrar")} style={[styles.presso, { marginTop: 20, width: 160, height: 40 }]}>
