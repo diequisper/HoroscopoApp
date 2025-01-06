@@ -5,7 +5,6 @@ import { HostDimensions } from '../hooks/HostDimensions';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParams } from './App';
 
-
 export const LoginView = () => {
 
   const [svHeight, setSvHeight]  = useState(0)
