@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
  
 export const VeredicHoroscope = () => {
@@ -16,14 +16,6 @@ export const VeredicHoroscope = () => {
         Las personas regidas por Ashwini Nakshatra tienen un día lleno de energía y dinamismo. Es ideal para iniciar proyectos, viajar o resolver problemas rápidamente. Mantén el equilibrio emocional y evita la impulsividad.
         </Text>
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Volver</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Guardar</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   )
 }
@@ -70,22 +62,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
     textAlign: 'justify',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  button: {
-    backgroundColor: '#800000',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    width: '45%',
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });

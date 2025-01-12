@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 export const ChineseHoroscope = () => {
@@ -21,14 +21,6 @@ export const ChineseHoroscope = () => {
           empáticas y diplomáticas.
         </Text>
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Volver</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Guardar</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -64,7 +56,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    backgroundColor: '#FFE4E1', // Fondo claro para el texto
+    backgroundColor: '#FFE4E1', 
     borderRadius: 10,
     padding: 15,
     marginVertical: 20,
@@ -74,22 +66,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
     textAlign: 'justify',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  button: {
-    backgroundColor: '#800000', // Botones oscuros
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    width: '45%',
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });

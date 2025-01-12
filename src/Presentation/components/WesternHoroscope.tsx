@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
  
 export const WesternHoroscope = () => {
@@ -7,7 +7,7 @@ export const WesternHoroscope = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Horóscopo Occidental del día:</Text>
       <Image
-        source={require('../assets/images/horoscp2.png')} // Cambia la ruta al ícono que representa el horóscopo
+        source={require('../assets/images/horoscp2.png')} 
         style={styles.image}
       />
       <Text style={styles.subHeader}>Aries</Text>
@@ -18,14 +18,6 @@ export const WesternHoroscope = () => {
         buen día para conectar emocionalmente y aprovechar la energía positiva
         </Text>
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Volver</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Guardar</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   )
 }
@@ -71,22 +63,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
     textAlign: 'justify',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  button: {
-    backgroundColor: '#800000', // Botones oscuros
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    width: '45%',
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });
