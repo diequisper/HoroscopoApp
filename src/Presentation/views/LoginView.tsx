@@ -3,7 +3,7 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid
 import { MeshGradient } from '@kuss/react-native-mesh-gradient';
 import { HostDimensions } from '../hooks/HostDimensions';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParams } from './App';
+import { RootStackParams } from '../routes/StackNavigation';
 import { User } from '../../Domain/User';
 
 export const LoginView = () => {

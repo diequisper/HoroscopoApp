@@ -6,7 +6,7 @@ import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } fr
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 import { User } from '../../Domain/User'
 import { ToastAndroid } from 'react-native'
-import { RootStackParams } from './App'
+import { RootStackParams } from '../routes/StackNavigation'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 
 export const RegistrarView = () => {
