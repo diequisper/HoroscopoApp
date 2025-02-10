@@ -15,6 +15,7 @@
     "@react-native-community/datetimepicker": "^8.2.0",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
+    "axios": "^1.7.9",
     "HoroscopoApp": "file:",
     "react": "18.2.0",
     "react-native": "0.74.6",

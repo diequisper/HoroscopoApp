@@ -1,13 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useState } from 'react'
 import { Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { WesternHoroscope } from '../components/WesternHoroscope';
 import { ChineseHoroscope } from '../components/ChineseHoroscope';
 import { VeredicHoroscope } from '../components/VeredicHoroscope';
 import Home from '../components/HomeScreen';
-import { RegistrarView } from '../views/RegistrarView';
-import { LoginView } from '../views/LoginView';
+import { RegistrarView } from '../views/auth/RegistrarView';
+import { LoginView } from '../views/auth/LoginView';
 import { NavigationContainer } from '@react-navigation/native';
 
 
@@ -23,20 +22,10 @@ export type RootStackParams = {
 const Stack = createStackNavigator<RootStackParams>();
 
 export const StackNavigation = () => {
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    const handleLogin = () => {
-        setIsLoggedIn(true);
-    };
-
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-    };
-
     return (
         <NavigationContainer>
             <Stack.Navigator
+                initialRouteName='Login'
                 screenOptions={{
                     headerStyle: {
                         backgroundColor: '#cb0318ff',
@@ -67,7 +56,6 @@ export const StackNavigation = () => {
                             title: 'Inicio',
                             headerRight: () => (
                                 <TouchableOpacity
-                                    onPress={handleLogout}
                                     style={{
                                         marginRight: 15,
                                         padding: 5,

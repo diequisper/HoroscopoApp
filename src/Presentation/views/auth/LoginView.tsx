@@ -1,10 +1,10 @@
 import React, {useRef, useState } from 'react'
 import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from 'react-native'
 import { MeshGradient } from '@kuss/react-native-mesh-gradient';
-import { HostDimensions } from '../hooks/HostDimensions';
+import { HostDimensions } from '../../hooks/HostDimensions';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParams } from '../routes/StackNavigation';
-import { User } from '../../Domain/User';
+import { RootStackParams } from '../../routes/StackNavigation';
+import { User } from '../../../Domain/entities/User';
 
 export const LoginView = () => {
 
@@ -64,7 +64,7 @@ export const LoginView = () => {
           }]}>
             <View style={styles.tbox}>
               <Text style={styles.title}>Horoscopo App</Text>
-              <Image source={require('../assets/images/rb_27307.png')} style={{ width: 140, height: 140, marginTop: 20 }} />
+              <Image source={require('../../assets/images/rb_27307.png')} style={{ width: 140, height: 140, marginTop: 20 }} />
             </View>
             <View style={styles.formbox}>
               <View style={styles.lblInputBox}>
@@ -79,7 +79,7 @@ export const LoginView = () => {
                 <Pressable onPress={() => authorise()} style={styles.presso}>
                   <Text style={styles.btnText}>Entrar</Text>
                 </Pressable>
-                <Pressable onPress={() => navigation.navigate("Registrar")} style={[styles.presso, { marginTop: 20, width: 160, height: 40 }]}>
+                <Pressable onPress={() => navigation.navigate("Registrar")} style={[styles.presso, { marginTop: 30, width: 160, height: 40 }]}>
                   <Text style={[styles.btnText, { fontSize: 16 }]}>Registrar</Text>
                 </Pressable>
               </View>

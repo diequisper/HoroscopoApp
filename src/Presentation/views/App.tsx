@@ -6,12 +6,10 @@
  */
 
 import React, { useState } from 'react';
-import { StackNavigation } from './routes/StackNavigation';
+import { StackNavigation } from '../routes/StackNavigation';
 
 
 function App(): React.JSX.Element {
-
-
     return (
       <StackNavigation />
     );

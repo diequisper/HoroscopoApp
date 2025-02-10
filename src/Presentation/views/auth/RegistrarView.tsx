@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { styles } from './LoginView'
 import { MeshGradient } from '@kuss/react-native-mesh-gradient'
-import { HostDimensions } from '../hooks/HostDimensions'
+import { HostDimensions } from '../../hooks/HostDimensions'
 import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
-import { User } from '../../Domain/User'
 import { ToastAndroid } from 'react-native'
-import { RootStackParams } from '../routes/StackNavigation'
+import { RootStackParams } from '../../routes/StackNavigation'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { RegistrarUsuario } from '../../../Domain/useCases/RegistrarUsuario'
 
 export const RegistrarView = () => {
 
@@ -15,6 +15,7 @@ export const RegistrarView = () => {
   const name = useRef<string>("")
   const country = useRef<string>("");
   const city = useRef<string>("");
+  const email = useRef<string>("");
   const username = useRef<string>("");
   const password = useRef<string>("");
   const [date, setDate] = useState(new Date());
@@ -62,18 +63,21 @@ export const RegistrarView = () => {
     });
   };
   
-  function registrar(){
-    if(!name || !country || !username || !password
-        || formattedDate.length < 8 ){
-
-      ToastAndroid.show("Existen campos necesarios en blanco", ToastAndroid.LONG)
-      return
+  async function registrar(){
+    try {
+      const thisNewUser = await RegistrarUsuario(name.current, date, country.current, 
+        username.current, password.current, email.current, time, city.current)
+      if(thisNewUser != null){
+        ToastAndroid.show("Usuario Registrado", ToastAndroid.LONG)
+      }
+    } catch (error : any) {
+      const errorsArray : Array<string> = error.message.split(",")
+      console.log(date)
+      errorsArray.forEach(errItem => {
+        ToastAndroid.show(errItem, ToastAndroid.LONG)
+        console.log(errItem)
+      });
     }
-
-    const thisUser : User = new User(1, name.current, date, country.current, username.current, password.current, time, city.current)
-    User.users.push(thisUser)
-    ToastAndroid.show("Registro exitoso", ToastAndroid.LONG)
-    navigation.navigate("Login")
   }
 
   const handleInput = (input : string, id : string) => {
@@ -87,6 +91,9 @@ export const RegistrarView = () => {
           break
         case "ciudad": 
           if (city.current != input) {city.current = input;}
+          break;
+        case "correo": 
+          if (email.current != input) {email.current = input;}
           break;
         case "usuario": 
           if (username.current != input) {username.current = input;}
@@ -158,6 +165,11 @@ export const RegistrarView = () => {
             </View>
           </View>
           <View style={styles.lblInputBox}>
+            <Text style={styles.label}>Correo</Text>
+            <TextInput keyboardType="email-address" autoCapitalize="none"
+              style={styles.input}  onEndEditing={(e) => handleInput(e.nativeEvent.text, "correo")}></TextInput>
+          </View>
+          <View style={styles.lblInputBox}>
             <Text style={styles.label}>Usuario</Text>
             <TextInput style={styles.input}  onEndEditing={(e) => handleInput(e.nativeEvent.text, "usuario")}></TextInput>
           </View>
@@ -165,8 +177,8 @@ export const RegistrarView = () => {
             <Text style={styles.label}>Contraseña</Text>
             <TextInput secureTextEntry={true} onEndEditing={(e) => handleInput(e.nativeEvent.text, "contraseña")} style={styles.input}></TextInput>
           </View>
-          <View style={[styles.lblInputBox, { marginTop: 20 }]}>
-            <Pressable onPress={() => registrar()} style={[styles.presso, { marginTop: 20, width: 160}]}>
+          <View style={[styles.lblInputBox, { marginTop: 10 }]}>
+            <Pressable onPress={() => registrar()} style={[styles.presso, {width: 160}]}>
               <Text style={[styles.btnText, { fontSize: 16 }]}>Empezar</Text>
             </Pressable>
           </View>
