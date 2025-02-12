@@ -4,14 +4,15 @@ import { BackendUser } from "../sources/remote/interface/NestBackInterface";
 export class AuthMapper{
   static userToEntity(backUser : BackendUser) : User{
     return{
-      id : backUser.uid,
-      name : backUser.displayName,
+      id : backUser.id,
+      name : backUser.name,
+      country : backUser.country,
+      city : backUser.city,
+      birthDate : new Date(backUser.birthDate),
+      timeBirth: new Date(backUser.timeBirth),
+      username : backUser.username,
       email : backUser.email,
-      country : "",
-      city : undefined,
-      birthDate : new Date(),
-      username : "",
-      password : ""
+      password : backUser.password
     }
   }
 }

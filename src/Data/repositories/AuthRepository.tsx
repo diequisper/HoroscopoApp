@@ -10,11 +10,17 @@ export class AuthRepository implements IAuthRepository{
     try {
       const url = "/auth/registrar"
       const userData = {
+        "name": name,
+        "birthDate": birthDate,
+        "timeBirth": timeBirth,
+        "country": country,
+        "city": city,
+        "email" : email,
         "username": username, 
         "password": password, 
-        "email" : email,
       }
       const response = await NestBack.post<BackendUser>(url, userData)
+      console.log(response.data)
       return AuthMapper.userToEntity(response.data);
     } catch (error : any) {
       console.log(error)
