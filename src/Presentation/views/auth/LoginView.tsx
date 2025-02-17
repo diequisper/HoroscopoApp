@@ -4,7 +4,7 @@ import { MeshGradient } from '@kuss/react-native-mesh-gradient';
 import { HostDimensions } from '../../hooks/HostDimensions';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParams } from '../../routes/StackNavigation';
-import { User } from '../../../Domain/entities/User';
+import { UseAuthStore } from '../../hooks/UseAuthStore';
 
 export const LoginView = () => {
 
@@ -13,8 +13,7 @@ export const LoginView = () => {
   const {screenHeight} = HostDimensions()
   const usuario = useRef("");
   const password = useRef("");
-
-  console.log(User.getAllUser())
+  const {login, verify} = UseAuthStore()
 
   const navigation = useNavigation<NavigationProp<RootStackParams>>()
 
@@ -25,22 +24,24 @@ export const LoginView = () => {
     hasLayoutRun.current = true;
   };
 
-  function authorise(){
-    for(const u of User.getAllUser()){
-      if (usuario.current === u.username){
-        if(password.current === u.password){
-          ToastAndroid.show(`Bienvenido ${u.name}`, ToastAndroid.LONG)
-          navigation.navigate("Home")
-        }
-        else{
-          ToastAndroid.show(`${u.name} la contraseña no coincide con el registro`, ToastAndroid.LONG)
-        }
-        return
+  async function authorise(){
+    try {
+      const token = await login(usuario.current, password.current)
+      const verifiedUser = await verify()
+      if(verifiedUser != null){
+        ToastAndroid.show(`Bienvenido ${verifiedUser.username}`, ToastAndroid.LONG)
+        navigation.navigate("Home")
+      }else{
+        ToastAndroid.show(`No se pudo encontrar al usuario`, ToastAndroid.LONG)
       }
-    };
-
-      ToastAndroid.show(`No existe ese nombre de usuario`, ToastAndroid.LONG)
-      return
+      
+    } catch (error : any) {
+      const errorsArray : Array<string> = error.message.split(",")
+      errorsArray.forEach(errItem => {
+        ToastAndroid.show(errItem, ToastAndroid.LONG)
+        console.log(errItem)
+      });
+    }
   }
 
   return (

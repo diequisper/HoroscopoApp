@@ -5,13 +5,18 @@
  * @format
  */
 
-import React, { useState } from 'react';
 import { StackNavigation } from '../routes/StackNavigation';
+import { AuthProvider } from '../context/AuthProvider';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 function App(): React.JSX.Element {
     return (
-      <StackNavigation />
+      <NavigationContainer>
+        <AuthProvider>
+          <StackNavigation />
+        </AuthProvider>
+      </NavigationContainer>
     );
 }
 

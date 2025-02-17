@@ -1,4 +1,4 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { WesternHoroscope } from '../components/WesternHoroscope';
@@ -7,7 +7,9 @@ import { VeredicHoroscope } from '../components/VeredicHoroscope';
 import Home from '../components/HomeScreen';
 import { RegistrarView } from '../views/auth/RegistrarView';
 import { LoginView } from '../views/auth/LoginView';
-import { NavigationContainer } from '@react-navigation/native';
+import { UseAuthStore } from '../hooks/UseAuthStore';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { StorageAdapter } from '../../Data/sources/local/LocalStorage';
 
 
 export type RootStackParams = {
@@ -22,10 +24,12 @@ export type RootStackParams = {
 const Stack = createStackNavigator<RootStackParams>();
 
 export const StackNavigation = () => {
+
+    const {logout} = UseAuthStore()
+    const navigation = useNavigation<NavigationProp<RootStackParams>>()
+
     return (
-        <NavigationContainer>
             <Stack.Navigator
-                initialRouteName='Login'
                 screenOptions={{
                     headerStyle: {
                         backgroundColor: '#cb0318ff',
@@ -56,6 +60,12 @@ export const StackNavigation = () => {
                             title: 'Inicio',
                             headerRight: () => (
                                 <TouchableOpacity
+                                    onPress={async () => {logout(); 
+                                        navigation.navigate("Login");
+                                        await StorageAdapter.removeItem('thisSignoW')
+                                        await StorageAdapter.removeItem('thisHcTodayW')
+                                        await StorageAdapter.removeItem('thisSignoC')
+                                        await StorageAdapter.removeItem('thisHcTodayC')}}
                                     style={{
                                         marginRight: 15,
                                         padding: 5,
@@ -73,6 +83,5 @@ export const StackNavigation = () => {
                 <Stack.Screen name="ChineseHoroscope" component={ChineseHoroscope} options={{ title: 'Horóscopo Chino' }} />
                 <Stack.Screen name="VedicHoroscope" component={VeredicHoroscope} options={{ title: 'Horóscopo Védico' }} />
             </Stack.Navigator>
-        </NavigationContainer>
     )
 }

@@ -1,5 +1,5 @@
 export class User {
-  id : number;
+  id : string;
   name : string;
   birthDate : Date;
   timeBirth? :  Date;
@@ -8,10 +8,8 @@ export class User {
   email? : string;
   username : string;
   password : string;
-  static users : User[] = [];
 
-
-  constructor(id : number, name : string, birthDate : Date, country : string, 
+  constructor(id : string, name : string, birthDate : Date, country : string, 
     username : string, password : string, timeBirth ?: Date, city ?: string, email ?: string){
     this.id = id;
     this.name = name;
@@ -22,13 +20,5 @@ export class User {
     this.email = email
     this.username = username;
     this.password = password;
-  }
-
-  static addUser(thisUser : User) : void{
-    this.users.push(thisUser)
-  }
-
-  static getAllUser() : User[]{
-    return this.users
   }
 }

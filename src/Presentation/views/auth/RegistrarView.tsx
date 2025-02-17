@@ -65,47 +65,22 @@ export const RegistrarView = () => {
   
   async function registrar(){
     try {
-
-      const formattedBirthDate = date.toISOString().split('T')[0];
-
-      const combinedDateTime = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        time.getHours(),
-        time.getMinutes(),
-        time.getSeconds()
-      );
-      const formattedTimeBirth = combinedDateTime.toISOString();
-
-      const birthDateAsDate = new Date(formattedBirthDate); // Convertir string a Date
-      const timeBirthAsDate = new Date(formattedTimeBirth); // Convertir string a Date
-      
-      console.log("Nombre:", name.current);
-      console.log("Fecha de Nacimiento:", formattedBirthDate);
-      console.log("Hora de Nacimiento:", formattedTimeBirth);
-      console.log("País:", country.current);
-      console.log("Ciudad:", city.current);
-      console.log("Correo:", email.current);
-      console.log("Usuario:", username.current);
-      console.log("Contraseña:", password.current);
-
       const thisNewUser = await RegistrarUsuario(
         name.current, 
-        birthDateAsDate, 
+        date, 
         country.current, 
         username.current, 
         password.current, 
         email.current, 
-        timeBirthAsDate, 
+        time, 
         city.current
       );
       if(thisNewUser != null){
         ToastAndroid.show("Usuario Registrado", ToastAndroid.LONG)
+        navigation.navigate("Login")
       }
     } catch (error : any) {
       const errorsArray : Array<string> = error.message.split(",")
-      console.log(date)
       errorsArray.forEach(errItem => {
         ToastAndroid.show(errItem, ToastAndroid.LONG)
         console.log(errItem)
