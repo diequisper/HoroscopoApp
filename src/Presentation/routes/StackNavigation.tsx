@@ -60,7 +60,7 @@ export const StackNavigation = () => {
                             title: 'Inicio',
                             headerRight: () => (
                                 <TouchableOpacity
-                                    onPress={async () => {logout(); 
+                                    onPress={async () => {logout();
                                         navigation.navigate("Login");
                                         await StorageAdapter.removeItem('thisSignoW')
                                         await StorageAdapter.removeItem('thisHcTodayW')

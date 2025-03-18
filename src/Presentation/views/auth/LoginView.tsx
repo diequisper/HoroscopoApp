@@ -34,7 +34,7 @@ export const LoginView = () => {
       }else{
         ToastAndroid.show(`No se pudo encontrar al usuario`, ToastAndroid.LONG)
       }
-      
+  
     } catch (error : any) {
       const errorsArray : Array<string> = error.message.split(",")
       errorsArray.forEach(errItem => {
