@@ -57,7 +57,6 @@ export class AuthRepository implements IAuthRepository{
       return data;
     } catch (error : any) {
       console.log("error en verificacion")
-      console.log(error)
       throw new Error(error.response?.data?.message || error.message)
     }
   }

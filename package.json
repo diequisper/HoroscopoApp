@@ -22,6 +22,7 @@
     "HoroscopoApp": "file:",
     "react": "18.2.0",
     "react-native": "0.74.6",
+    "react-native-dotenv": "^3.4.11",
     "react-native-gesture-handler": "^2.21.2",
     "react-native-safe-area-context": "^5.0.0",
     "react-native-screens": "^4.4.0",
